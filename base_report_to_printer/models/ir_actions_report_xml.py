@@ -26,6 +26,10 @@ class IrActionsReportXml(models.Model):
         string="# Copies",
         default=1,
     )
+    number_up = fields.Integer(
+        string="# Reports per page",
+        default=1,
+    )
     printing_printer_id = fields.Many2one(
         comodel_name='printing.printer',
         string='Printer'
