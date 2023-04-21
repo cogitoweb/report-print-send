@@ -30,6 +30,10 @@ class IrActionsReportXml(models.Model):
         string="# Reports per page",
         default=1,
     )
+    fit_to_page = fields.Boolean(
+        string="Fit to page",
+        default=False,
+    )
     printing_printer_id = fields.Many2one(
         comodel_name='printing.printer',
         string='Printer'

@@ -75,7 +75,7 @@ class PrintingPrinter(models.Model):
 
     # TODO Rename param report to report_name, to make behavior obvious
     @api.multi
-    def print_options(self, report=None, format=None, copies=1, number_up=1):
+    def print_options(self, report=None, format=None, copies=1, number_up=1, fit_to_page=False):
         """ Hook to set print options """
         options = {}
         if format == 'raw':
@@ -84,6 +84,8 @@ class PrintingPrinter(models.Model):
             options['copies'] = str(copies)
         if number_up > 1:
             options['number-up'] = str(number_up)
+        if fit_to_page:
+            options['fit-to-page'] = 'True'
         return options
 
     # TODO Rename param report to report_name, to make behavior obvious
@@ -110,19 +112,19 @@ class PrintingPrinter(models.Model):
                 1
             )
         number_up = report_obj.number_up or 1
-
+        fit_to_page = report_obj.fit_to_page
         return self.print_file(
-            file_name, report=report, copies=copies, format=format, number_up=number_up)
+            file_name, report=report, copies=copies, format=format, number_up=number_up, fit_to_page=fit_to_page)
 
     # TODO Rename param report to report_name, to make behavior obvious
     @api.multi
-    def print_file(self, file_name, report=None, copies=1, format=None, number_up=1):
+    def print_file(self, file_name, report=None, copies=1, format=None, number_up=1, fit_to_page=False):
         """ Print a file """
         self.ensure_one()
 
         connection = self.server_id._open_connection(raise_on_error=True)
         options = self.print_options(
-            report=report, format=format, copies=copies, number_up=number_up)
+            report=report, format=format, copies=copies, number_up=number_up, fit_to_page=fit_to_page)
 
         _logger.debug(
             'Sending job to CUPS printer %s on %s'

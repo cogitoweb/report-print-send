@@ -12,6 +12,7 @@
             <field name="property_printing_action_id"/>
             <field name="report_copies"/>
             <field name="number_up"/>
+            <field name="fit_to_page"/>
             <field name="printing_printer_id"/>
           </group>
           <separator string="Specific actions per user"/>
