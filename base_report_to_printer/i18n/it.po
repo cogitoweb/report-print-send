@@ -53,7 +53,12 @@ msgstr ""
 #. module: base_report_to_printer
 #: model:ir.model.fields,field_description:base_report_to_printer.field_printing_server_address
 msgid "Address"
-msgstr ""
+msgstr "Indirizzo"
+
+#. module: base_report_to_printer
+#: model:ir.ui.view,arch_db:base_report_to_printer.act_report_xml_view
+msgid "Automatic print"
+msgstr "Stampa automatica"
 
 #. module: base_report_to_printer
 #: selection:printing.printer,status:0
@@ -448,7 +453,7 @@ msgstr ""
 #. module: base_report_to_printer
 #: model:ir.ui.view,arch_db:base_report_to_printer.act_report_xml_view
 msgid "Print"
-msgstr ""
+msgstr "Stampa"
 
 #. module: base_report_to_printer
 #: model:ir.model,name:base_report_to_printer.model_printing_action
