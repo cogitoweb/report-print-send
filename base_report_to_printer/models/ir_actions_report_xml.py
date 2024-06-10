@@ -46,6 +46,12 @@ class IrActionsReportXml(models.Model):
              'user basis'
     )
 
+    auto_print_ids = fields.One2many(
+        string="Printer",
+        comodel_name='ir.actions.report.auto.print',
+        inverse_name='report_id'
+    )
+
     @api.model
     def print_action_for_report_name(self, report_name):
         """ Returns if the action is a direct print or pdf

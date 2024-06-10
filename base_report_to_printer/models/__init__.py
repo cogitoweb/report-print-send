@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import ir_actions_report_auto_print
 from . import ir_actions_report_xml
 from . import printing_action
 from . import printing_job

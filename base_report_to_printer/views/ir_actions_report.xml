@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Adding automatic print tab -->
+        <record id="act_report_xml_view_inherited" model="ir.ui.view">
+            <field name="name">ir.actions.report.xml.inherited</field>
+            <field name="inherit_id" ref="base.act_report_xml_view" />
+            <field name="model">ir.actions.report.xml</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="autoprint" string="Automatic print">
+                        <field name="auto_print_ids">
+                            <tree editable="top">
+                                <field name="printer_id" />
+                                <field name="copies" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+</odoo>

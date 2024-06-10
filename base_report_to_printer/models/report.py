@@ -59,3 +59,19 @@ class Report(models.Model):
             printer.print_document(report_name, document, report.report_type)
 
         return document
+    
+    @api.model
+    def auto_print_document(self, record_ids, report_name, html=None, data=None):
+        """ Print a document, do not return the document file """
+        document = self.with_context(must_skip_send_to_printer=True).get_pdf(
+            record_ids, report_name, html=html, data=data)
+        report = self._get_report_from_name(report_name)
+        behaviour = report.behaviour()[report.id]
+
+        for auto_print in report.auto_print_ids:
+            auto_print.printer_id.print_document(
+                report_name,
+                document,
+                report.report_type,
+                copies=auto_print.copies   
+            )
