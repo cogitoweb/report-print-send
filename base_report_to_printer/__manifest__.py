@@ -14,7 +14,7 @@
               "LasLabs, Tecnativa, Odoo Community Association (OCA)",
     'website': 'https://github.com/OCA/report-print-send',
     'license': 'AGPL-3',
-    "depends": ['report'],
+    "depends": ['report', 'queue_job'],
     'data': [
         'data/printing_data.xml',
         'security/security.xml',
