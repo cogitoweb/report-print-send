@@ -144,7 +144,7 @@ msgstr "Compressed using an unknown algorithm"
 #. module: base_report_to_printer
 #: model:ir.model.fields,field_description:base_report_to_printer.field_ir_actions_report_auto_print_copies
 msgid "Copies"
-msgstr "Copies"
+msgstr "Copie"
 
 #. module: base_report_to_printer
 #: model:ir.model.fields,field_description:base_report_to_printer.field_printing_action_create_uid
