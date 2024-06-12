@@ -139,7 +139,12 @@ msgstr ""
 #. module: base_report_to_printer
 #: selection:printing.job,job_state_reason:0
 msgid "Compressed using an unknown algorithm"
-msgstr ""
+msgstr "Compressed using an unknown algorithm"
+
+#. module: base_report_to_printer
+#: model:ir.model.fields,field_description:base_report_to_printer.field_ir_actions_report_auto_print_copies
+msgid "Copies"
+msgstr "Copies"
 
 #. module: base_report_to_printer
 #: model:ir.model.fields,field_description:base_report_to_printer.field_printing_action_create_uid
@@ -462,7 +467,9 @@ msgstr "Azione di stampa"
 
 #. module: base_report_to_printer
 #: model:ir.model,name:base_report_to_printer.model_printing_printer
+#: model:ir.model.fields,field_description:base_report_to_printer.field_ir_act_report_xml_auto_print_ids
 #: model:ir.model.fields,field_description:base_report_to_printer.field_ir_act_report_xml_printing_printer_id
+#: model:ir.model.fields,field_description:base_report_to_printer.field_ir_actions_report_auto_print_printer_id
 #: model:ir.model.fields,field_description:base_report_to_printer.field_printing_job_printer_id
 #: model:ir.model.fields,field_description:base_report_to_printer.field_printing_report_xml_action_printer_id
 msgid "Printer"
