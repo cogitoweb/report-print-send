@@ -9,12 +9,14 @@ _logger = logging.getLogger(__name__)
 class IrActionsReportAutoPrint(models.Model):
 
     _name = 'ir.actions.report.auto.print'
+    _description = "Autoprint settings"
 
     # Fields declaration
 
     report_id = fields.Many2one(
         string="Report",
-        comodel_name='ir.actions.report.xml'
+        comodel_name='ir.actions.report.xml',
+        required=True
     )
 
     printer_id = fields.Many2one(
@@ -27,4 +29,3 @@ class IrActionsReportAutoPrint(models.Model):
         string="Copies",
         required=True
     )
-    
