@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, exceptions, _, api
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import job, identity_exact
 
 
 class Report(models.Model):
@@ -64,7 +64,7 @@ class Report(models.Model):
     @api.model
     @job(default_channel='root.delayed_document')
     def auto_print_async(self, record_ids, report_name, html=None, data=None):
-        """ Print the document as configured in auto print settings """
+        """ Print report as configured in auto print settings """
         document = self.with_context(must_skip_send_to_printer=True).get_pdf(
             record_ids, report_name, html=html, data=data)
         report = self._get_report_from_name(report_name)
@@ -76,9 +76,11 @@ class Report(models.Model):
                 report.report_type,
                 copies=auto_print.copies
             )
-    
-    def register_auto_print_job(self, record_ids):
-        report_auto_print = self.env['ir.actions.report.auto.print'].search([('report_id', '=', self.id)])
-        if report_auto_print:
-            self.with_delay(identity_key=identity_exact).auto_print_async(record_ids, report_auto_print.report_id.report_name)
-    
+
+    def register_auto_print_job(self, record_ids, report_name):
+        """ Create a job to print report as configured in auto print settings"""
+        # Check if report has some autoprint settings
+        xml_report = self._get_report_from_name(report_name)
+        if xml_report.auto_print_ids:
+            new_job = self.with_delay(identity_key=identity_exact).auto_print_async(record_ids, report_name)
+        return new_job
