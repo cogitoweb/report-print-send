@@ -63,7 +63,7 @@ class Report(models.Model):
 
     @api.model
     @job(default_channel='root.delayed_document')
-    def auto_print_document(self, record_ids, report_name, html=None, data=None):
+    def auto_print_async(self, record_ids, report_name, html=None, data=None):
         """ Print the document as configured in auto print settings """
         document = self.with_context(must_skip_send_to_printer=True).get_pdf(
             record_ids, report_name, html=html, data=data)
@@ -76,3 +76,9 @@ class Report(models.Model):
                 report.report_type,
                 copies=auto_print.copies
             )
+    
+    def register_auto_print_job(self, vals):
+        report_auto_print = self.env['ir.actions.report.auto.print'].search([('report_id', '=', self.id)])
+        if report_auto_print:
+            self.with_delay(identity_key=identity_exact).auto_print_async(vals, "l10n_it_ddt.report_ddt_main")
+    
