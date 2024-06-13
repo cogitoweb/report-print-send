@@ -77,8 +77,8 @@ class Report(models.Model):
                 copies=auto_print.copies
             )
     
-    def register_auto_print_job(self, vals):
+    def register_auto_print_job(self, record_ids):
         report_auto_print = self.env['ir.actions.report.auto.print'].search([('report_id', '=', self.id)])
         if report_auto_print:
-            self.with_delay(identity_key=identity_exact).auto_print_async(vals, "l10n_it_ddt.report_ddt_main")
+            self.with_delay(identity_key=identity_exact).auto_print_async(record_ids, report_auto_print.report_id.report_name)
     
