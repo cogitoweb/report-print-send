@@ -28,6 +28,11 @@ class PrintingServer(models.Model):
         default=631, required=True, help='Port of the server.')
     active = fields.Boolean(
         default=True, help='If checked, this server is useable.')
+    enable_location_filter = fields.Boolean(
+        string="Location filter",
+        default=False,
+        help='If checked, only printers that location matches the name of this installation database will be added.'
+    )
     printer_ids = fields.One2many(
         comodel_name='printing.printer', inverse_name='server_id',
         string='Printers List',
@@ -56,6 +61,7 @@ class PrintingServer(models.Model):
 
     @api.multi
     def update_printers(self, domain=None, raise_on_error=False):
+        dbname = self.env.cr.dbname
         if domain is None:
             domain = []
 
@@ -79,6 +85,12 @@ class PrintingServer(models.Model):
             ])
             updated_printers = []
             for name, printer_info in printers.iteritems():
+
+                # Only add printers without location or with location matching current db name
+                printer_location = printer_info.get('printer-location', False)
+                if server.enable_location_filter and printer_location and printer_location.lower() != dbname.lower():
+                    continue
+
                 printer = self.env['printing.printer']
                 if name in existing_printers:
                     printer = existing_printers[name]
@@ -206,6 +218,8 @@ class PrintingServer(models.Model):
                     ('server_id', '=', server.id),
                     ('system_name', '=', printer_system_name),
                 ], limit=1)
+                if not printer:
+                    continue
                 job_values['printer_id'] = printer.id
 
                 if jobs:

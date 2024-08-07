@@ -19,6 +19,7 @@
                     <group>
                         <field name="address"/>
                         <field name="port"/>
+                        <field name="enable_location_filter"/>
                     </group>
                     <group>
                         <separator string="Printers" colspan="2"/>
