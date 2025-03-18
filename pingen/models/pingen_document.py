@@ -5,7 +5,7 @@
 
 import logging
 from requests.exceptions import ConnectionError
-from cStringIO import StringIO
+from io import StringIO
 
 import odoo
 from odoo import models, fields, _

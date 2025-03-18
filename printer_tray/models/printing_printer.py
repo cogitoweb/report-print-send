@@ -56,7 +56,7 @@ class PrintingPrinter(models.Model):
         # Add new trays
         vals['tray_ids'].extend([
             (0, 0, {'name': text, 'system_name': choice})
-            for choice, text in cups_trays.items()
+            for choice, text in list(cups_trays.items())
             if choice not in self.tray_ids.mapped('system_name')
         ])
 
@@ -64,7 +64,7 @@ class PrintingPrinter(models.Model):
         vals['tray_ids'].extend([
             (2, tray.id)
             for tray in self.tray_ids.filtered(
-                lambda record: record.system_name not in cups_trays.keys())
+                lambda record: record.system_name not in list(cups_trays.keys()))
         ])
 
         return vals
@@ -77,7 +77,7 @@ class PrintingPrinter(models.Model):
 
         if report is not None:
             full_report = self.env['report']._get_report_from_name(report) \
-                if isinstance(report, basestring) else report
+                if isinstance(report, str) else report
             # Retrieve report default values
             if full_report.printer_tray_id:
                 tray = full_report.printer_tray_id

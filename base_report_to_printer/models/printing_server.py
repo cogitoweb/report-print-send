@@ -84,7 +84,7 @@ class PrintingServer(models.Model):
                 for printer in server.printer_ids
             ])
             updated_printers = []
-            for name, printer_info in printers.iteritems():
+            for name, printer_info in printers.items():
 
                 # Only add printers without location or with location matching current db name
                 printer_location = printer_info.get('printer-location', False)
@@ -183,7 +183,7 @@ class PrintingServer(models.Model):
                         ]))
 
             all_cups_job_ids = set()
-            for cups_job_id, job_data in jobs_data.items():
+            for cups_job_id, job_data in list(jobs_data.items()):
                 all_cups_job_ids.add(cups_job_id)
                 jobs = job_obj.with_context(active_test=False).search([
                     ('job_id_cups', '=', cups_job_id),

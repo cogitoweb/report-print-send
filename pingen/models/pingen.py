@@ -5,7 +5,7 @@
 
 import requests
 import logging
-import urlparse
+import urllib.parse
 import json
 import pytz
 
@@ -97,7 +97,7 @@ class Pingen(object):
         :param kwargs: additional arguments forwarded to the requests method
         """
 
-        p_url = urlparse.urljoin(self.url, endpoint)
+        p_url = urllib.parse.urljoin(self.url, endpoint)
 
         if endpoint == 'document/get':
             complete_url = '{}{}{}{}{}'.format(p_url,

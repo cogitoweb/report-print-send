@@ -137,7 +137,7 @@ class TestPrintingPrinter(TransactionCase):
         report.printer_tray_id = False
         action.printer_tray_id = False
         options = self.Model.print_options(report, 'pdf')
-        self.assertEquals(options, {
+        self.assertEqual(options, {
             'InputSlot': 'User tray',
         })
 
@@ -146,7 +146,7 @@ class TestPrintingPrinter(TransactionCase):
         report.printer_tray_id = report_tray
         action.printer_tray_id = False
         options = self.Model.print_options(report, 'pdf')
-        self.assertEquals(options, {
+        self.assertEqual(options, {
             'InputSlot': 'Report tray',
         })
 
@@ -155,7 +155,7 @@ class TestPrintingPrinter(TransactionCase):
         report.printer_tray_id = False
         action.printer_tray_id = action_tray
         options = self.Model.print_options(report, 'pdf')
-        self.assertEquals(options, {
+        self.assertEqual(options, {
             'InputSlot': 'Action tray',
         })
 
@@ -164,7 +164,7 @@ class TestPrintingPrinter(TransactionCase):
         report.printer_tray_id = report_tray
         action.printer_tray_id = action_tray
         options = self.Model.print_options(report, 'pdf')
-        self.assertEquals(options, {
+        self.assertEqual(options, {
             'InputSlot': 'Action tray',
         })
 
